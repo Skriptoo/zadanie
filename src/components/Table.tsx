@@ -10,9 +10,11 @@ const TableComponent = (props: {
   order: string,
   setHasMore: (value: boolean) => void
 }) => {
+
   const [tagList, setTagList] = useState<TagList>();
   const [error, setError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
+
   useEffect(() => {
       tagsService.getTags(props.pageSize, props.pageNumber, props.sort, props.order).then(
         (response) => {
@@ -24,6 +26,7 @@ const TableComponent = (props: {
         setError(true);
       })
   }, [props.pageNumber, props.pageSize, props.sort, props.order]);
+  
   return(error ? <Text> {errorMsg} </Text> :
     <TableContainer>
       <Table variant="simple" colorScheme="teal">
