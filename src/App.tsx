@@ -9,6 +9,7 @@ const App = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [sort, setSort] = useState<string>("popular");
   const [order, setOrder] = useState<string>("desc");
+  const [hasMore, setHasMore] = useState<boolean>(true);
   return (
       <Box width="50%">
         <Box display="flex" justifyContent="space-between">
@@ -17,6 +18,7 @@ const App = () => {
             pageNumber={pageNumber} 
             setPageSize={setPageSize} 
             pageSize={pageSize}
+            hasMore={hasMore}
           />
           <SortingBox 
             setSort={setSort}
@@ -29,6 +31,7 @@ const App = () => {
           pageNumber={pageNumber} 
           sort={sort}
           order={order}
+          setHasMore={setHasMore}
         />
       </Box>
   )

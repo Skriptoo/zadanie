@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { tagsService } from "../services/api/tagsService";
 import { TagList } from "../interfaces/tags";
 
-const TableComponent = (props: {pageSize: number, pageNumber: number, sort: string, order: string}) => {
+const TableComponent = (props: {
+  pageSize: number, 
+  pageNumber: number, 
+  sort: string, 
+  order: string,
+  setHasMore: (value: boolean) => void
+}) => {
   const [tagList, setTagList] = useState<TagList>();
   const [error, setError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -11,6 +17,7 @@ const TableComponent = (props: {pageSize: number, pageNumber: number, sort: stri
       tagsService.getTags(props.pageSize, props.pageNumber, props.sort, props.order).then(
         (response) => {
           setTagList(response.data);
+          props.setHasMore(response.data.has_more);
         }
       ).catch((error) => {
         setErrorMsg(error.message);

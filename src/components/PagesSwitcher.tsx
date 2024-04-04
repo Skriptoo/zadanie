@@ -13,9 +13,11 @@ const PagesSwitcher = (props: {
   setPageNumber: (value: number) => void,
   setPageSize: (value: number) => void, 
   pageSize: number,
+  hasMore: boolean
 }) => {
   const changePage = (value: number) => {
     if(props.pageNumber + value < 1) return;
+    if(!props.hasMore && value > 0) return;
     props.setPageNumber(props.pageNumber + value);
   }
   const changePageSize = (value: number) => {
